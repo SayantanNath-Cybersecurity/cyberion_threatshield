@@ -1,0 +1,19 @@
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Raw third-party telemetry datasets
+data/raw/
+
+# Generated / processed telemetry
+data/processed/
+
+# Local analysis artifacts
+*.log
+*.tmp
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
