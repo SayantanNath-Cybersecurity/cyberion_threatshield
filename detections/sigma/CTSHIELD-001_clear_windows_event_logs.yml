@@ -1,0 +1,20 @@
+title: Windows Security Event Log Cleared
+id: 6f7f2f4e-6e0d-4e2f-9b4a-7c5e91d2a103
+status: experimental
+description: Detects Windows Security Event ID 1102, which indicates that the Security audit event log was cleared.
+references:
+  - https://attack.mitre.org/techniques/T1685/005/
+tags:
+  - attack.defense-impairment
+  - attack.t1685.005
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 1102
+  condition: selection
+falsepositives:
+  - Authorized administrative activity involving security event log clearing
+  - System maintenance or troubleshooting performed by authorized personnel
+level: high
