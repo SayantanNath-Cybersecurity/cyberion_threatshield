@@ -1,0 +1,22 @@
+title: Kerberos Pre-Authentication Failure
+id: 3a1e8b64-5d42-4f3e-9c71-2b6f8d4a1e53
+status: experimental
+description: Detects Windows Security Event ID 4771 indicating a Kerberos pre-authentication failure.
+references:
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4771
+tags:
+  - attack.credential-access
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4771
+    Status: '0x00000018'
+  condition: selection
+falsepositives:
+  - Incorrect user passwords
+  - Expired or invalid credentials
+  - Legitimate authentication failures
+  - Misconfigured applications or services
+level: medium
