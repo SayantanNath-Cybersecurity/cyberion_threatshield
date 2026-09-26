@@ -1,0 +1,21 @@
+title: Failed Interactive Logon
+id: 7b3e9d21-64f8-4a52-bc17-5d90e6f34128
+status: experimental
+description: Detects Windows Security Event ID 4625 for failed interactive logons.
+references:
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4625
+tags:
+  - attack.credential-access
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4625
+    LogonType: 2
+  condition: selection
+falsepositives:
+  - Users entering an incorrect password
+  - Local applications attempting authentication with invalid credentials
+  - User account configuration or credential synchronization problems
+level: low
