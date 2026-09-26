@@ -1,0 +1,23 @@
+title: Network Logon to Administrator Account
+id: 4e8a2c71-93d5-46bf-b108-7c5f2e914a63
+status: experimental
+description: Detects successful Windows network logons using Logon Type 3 to the Administrator account.
+references:
+  - https://attack.mitre.org/techniques/T1078/
+tags:
+  - attack.credential-access
+  - attack.t1078
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4624
+    LogonType: 3
+    TargetUserName: Administrator
+  condition: selection
+falsepositives:
+  - Legitimate remote administration using the built-in Administrator account
+  - Authorized administrative access to servers
+  - Enterprise management software using administrative credentials
+level: medium
