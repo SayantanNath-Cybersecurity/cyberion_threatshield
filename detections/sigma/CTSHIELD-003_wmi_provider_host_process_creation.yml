@@ -1,0 +1,22 @@
+title: WMI Provider Host Process Creation
+id: 8c2f7a91-6b34-4d85-ae12-91f0c7b56328
+status: experimental
+description: Detects Windows process creation telemetry for WmiPrvSE.exe, the Windows Management Instrumentation Provider Host. This event can provide supporting evidence for WMI execution when correlated with authentication and related process activity.
+references:
+  - https://attack.mitre.org/techniques/T1047/
+tags:
+  - attack.execution
+  - attack.t1047
+logsource:
+  category: process_creation
+detection:
+  selection:
+    EventID: 4688
+    NewProcessName|endswith: '\WmiPrvSE.exe'
+  condition: selection
+falsepositives:
+  - Legitimate WMI-based administrative activity
+  - Enterprise management software using WMI
+  - Monitoring or inventory software using WMI
+  - Software deployment or configuration management activity
+level: medium
