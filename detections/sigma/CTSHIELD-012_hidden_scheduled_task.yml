@@ -1,0 +1,29 @@
+title: Hidden Windows Scheduled Task Created
+id: 4a8d2f71-6c93-4e15-b827-91f5d3a60428
+status: experimental
+description: Detects Windows Security Event ID 4698 for scheduled task creation where the task content indicates that the task is hidden and configured to run as LocalSystem.
+references:
+  - https://attack.mitre.org/techniques/T1053/005/
+  - https://attack.mitre.org/detectionstrategies/DET0441/
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4698
+tags:
+  - attack.execution
+  - attack.persistence
+  - attack.privilege-escalation
+  - attack.t1053.005
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4698
+    TaskContent|contains|all:
+      - '<Hidden>true</Hidden>'
+      - '<UserId>S-1-5-18</UserId>'
+  condition: selection
+falsepositives:
+  - Authorized administrative scheduled tasks configured to run as LocalSystem
+  - Legitimate system maintenance tasks
+  - Enterprise software deployment or management tools
+  - Security testing environments
+level: high
