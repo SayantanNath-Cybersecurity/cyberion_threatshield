@@ -1,0 +1,23 @@
+title: Windows Test Signing Enabled
+id: 2f8c6a41-7d93-4be5-a205-91c7e6f3b842
+status: experimental
+description: Detects Windows Security Event ID 4826 indicating that test signing is enabled in the system configuration.
+references:
+  - https://attack.mitre.org/techniques/T1553/006/
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4826
+tags:
+  - attack.defense-impairment
+  - attack.t1553.006
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4826
+    TestSigning: '%%1842'
+  condition: selection
+falsepositives:
+  - Authorized driver development or testing environments
+  - Legitimate kernel or driver troubleshooting
+  - Approved security research environments
+level: high
