@@ -1,0 +1,25 @@
+title: Plink Network Connection Indicative of Protocol Tunneling
+id: 91c7e4a2-6b53-48d1-af20-7e9c35b61482
+status: experimental
+description: Detects Windows Security Event ID 5156 network connections created by plink.exe, a command-line SSH client that can be used for protocol tunneling and RDP forwarding.
+references:
+  - https://attack.mitre.org/techniques/T1572/
+  - https://attack.mitre.org/detectionstrategies/DET0538/
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-5156
+tags:
+  - attack.command-and-control
+  - attack.t1572
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 5156
+    Application|endswith: '\plink.exe'
+  condition: selection
+falsepositives:
+  - Authorized administrators using Plink for legitimate SSH tunneling
+  - Approved remote administration or troubleshooting
+  - Security testing and penetration testing activity
+  - Legitimate port forwarding performed by authorized users
+level: high
