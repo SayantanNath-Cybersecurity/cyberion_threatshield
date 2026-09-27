@@ -1,0 +1,26 @@
+title: Suspicious Windows Service Creation Using Unexpected Executable
+id: 7e4c1a92-5b63-48d7-a901-2f6e8c35b714
+status: experimental
+description: Detects Windows Service Control Manager Event ID 7045 where a newly created service uses cmd.exe or calc.exe as its service image path.
+references:
+  - https://attack.mitre.org/techniques/T1543/003/
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4697
+tags:
+  - attack.persistence
+  - attack.privilege-escalation
+  - attack.t1543.003
+logsource:
+  product: windows
+  service: system
+detection:
+  selection:
+    EventID: 7045
+    ImagePath:
+      - 'cmd.exe'
+      - 'calc.exe'
+  condition: selection
+falsepositives:
+  - Authorized security testing
+  - Administrative troubleshooting using temporary service configurations
+  - Software installation or maintenance activity using unexpected service executables
+level: high
