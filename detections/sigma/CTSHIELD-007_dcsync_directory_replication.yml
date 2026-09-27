@@ -1,0 +1,26 @@
+title: Directory Replication Access Indicative of DCSync
+id: 5d7a2c91-8e43-4f16-b6c5-1a9e7d3f2048
+status: experimental
+description: Detects Windows Security Event ID 4662 directory service access containing replication-related extended rights that can indicate DCSync activity.
+references:
+  - https://attack.mitre.org/techniques/T1003/006/
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4662
+tags:
+  - attack.credential-access
+  - attack.t1003.006
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4662
+    ObjectServer: DS
+    AccessMask: '0x00000100'
+    Properties|contains:
+      - '{1131f6aa-9c07-11d1-f79f-00c04fc2dcd2}'
+      - '{1131f6ad-9c07-11d1-f79f-00c04fc2dcd2}'
+  condition: selection
+falsepositives:
+  - Legitimate directory replication activity performed by authorized domain controllers or administrative tooling
+  - Identity or directory management software that legitimately requests directory replication permissions
+level: high
