@@ -1,0 +1,25 @@
+title: Windows Computer Account Creation
+id: 8b3e6d21-5a74-49c8-b102-7f6c3e91d845
+status: experimental
+description: Detects Windows Security Event ID 4720 where the newly created account uses the computer-account naming pattern represented by a trailing dollar sign.
+references:
+  - https://attack.mitre.org/techniques/T1136/002/
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4720
+tags:
+  - attack.persistence
+  - attack.t1136.002
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4720
+    TargetUserName: '$'
+    SamAccountName: '$'
+  condition: selection
+falsepositives:
+  - Legitimate domain computer joins
+  - Authorized workstation or server provisioning
+  - Domain administration and infrastructure management
+  - Automated machine-account provisioning
+level: medium
