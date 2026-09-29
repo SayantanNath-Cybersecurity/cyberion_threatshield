@@ -1,0 +1,50 @@
+title: Network Logon Followed by WMI Provider Host Execution
+id: 6d8f2a41-93c7-4e15-b6a2-51f9d8c73420
+status: experimental
+description: Correlates a successful network logon with subsequent WMI Provider Host process creation on the same Windows host within a short time window.
+references:
+  - https://learn.microsoft.com/windows/win32/wmisdk/wmi-start-page
+  - https://attack.mitre.org/techniques/T1047/
+tags:
+  - attack.t1047
+correlation:
+  type: temporal_ordered
+  rules:
+    - 9e6d1c42-7a35-4f81-b2c9-63e8a5d71420
+    - 5a3c7e91-42d6-4b85-9f13-c8e2a7645310
+  group-by:
+    - ComputerName
+  timespan: 5m
+falsepositives:
+  - Authorized remote administration
+  - Legitimate enterprise management software
+  - Administrative WMI operations
+level: medium
+---
+title: Network Logon for WMI Correlation
+id: 9e6d1c42-7a35-4f81-b2c9-63e8a5d71420
+name: wmi_network_logon
+status: experimental
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4624
+    LogonType: 3
+  condition: selection
+level: low
+---
+title: WMI Provider Host Creation for Correlation
+id: 5a3c7e91-42d6-4b85-9f13-c8e2a7645310
+name: wmi_provider_host_creation
+status: experimental
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    EventID: 4688
+    NewProcessName|endswith: '\WmiPrvSE.exe'
+  condition: selection
+level: medium

@@ -1,0 +1,21 @@
+title: Chrome Interactive Authentication Activity
+id: 7b2e9c41-6f53-4a80-bd17-3c5e91f20648
+status: experimental
+description: Detects Windows Security interactive authentication activity associated with the Chrome authentication process.
+references:
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4624
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4625
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    LogonType: 2
+    LogonProcessName: Chrome
+    ProcessName|endswith: '\chrome.exe'
+  condition: selection
+falsepositives:
+  - Normal Chrome authentication
+  - Browser session reauthentication
+  - Legitimate user authentication
+level: low

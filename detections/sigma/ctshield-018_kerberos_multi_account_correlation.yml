@@ -1,0 +1,24 @@
+title: Kerberos Pre-Authentication Failures Against Multiple Accounts
+id: 91c4e6a7-52d1-4f83-9b27-6e8a1c5d7342
+status: experimental
+description: Correlates repeated Kerberos pre-authentication failures from the same source address against multiple target accounts within a short time window.
+references:
+  - https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4771
+  - https://attack.mitre.org/techniques/T1110/
+tags:
+  - attack.t1110
+correlation:
+  type: value_count
+  rules:
+    - 3a1e8b64-5d42-4f3e-9c71-2b6f8d4a1e53
+  group-by:
+    - IpAddress
+  timespan: 5m
+  condition:
+    field: TargetUserName
+    gte: 2
+falsepositives:
+  - Multiple users entering incorrect passwords from the same workstation
+  - Authentication failures caused by a misconfigured service
+  - Legitimate administrative troubleshooting
+level: medium
