@@ -2,19 +2,20 @@
 
 ## Detection
 
-- Rule: CTSHIELD-005
-- Title: Network Logon to Administrator Account
-- Rule file: `detections/sigma/CTSHIELD-005_network_logon_administrator.yml`
-- ATT&CK technique: T1078 - Valid Accounts
-- Status: Experimental
-- Severity: Medium
+- **Rule:** CTSHIELD-005
+- **Title:** Network Logon to Administrator Account
+- **Rule file:** `detections/sigma/CTSHIELD-005_network_logon_administrator.yml`
+- **ATT&CK Technique:** T1078.001 - Default Accounts
+- **Tactic:** Credential Access
+- **Status:** Experimental
+- **Severity:** Medium
 
 ## Dataset
 
-- Dataset: EVTX-ATT&CK-SAMPLES
-- Source repository: `https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES`
-- Dataset commit: `4ceed2f4706daf601c212a8f91c113dd85349a2c`
-- Test file: `Lateral Movement/LM_WMI_4624_4688_TargetHost.evtx`
+- **Dataset:** EVTX-ATT&CK-SAMPLES
+- **Source repository:** `https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES`
+- **Dataset commit:** `4ceed2f4706daf601c212a8f91c113dd85349a2c`
+- **Test file:** `Lateral Movement/LM_WMI_4624_4688_TargetHost.evtx`
 
 ## Detection Logic
 
@@ -24,6 +25,8 @@ The rule detects Windows Security Event ID 4624 where:
 - `TargetUserName` equals `Administrator`
 
 Logon Type 3 represents a network logon in the observed Windows Security telemetry.
+
+The detection focuses on successful network authentication to the built-in Administrator account.
 
 ## Observed Telemetry
 
@@ -49,6 +52,10 @@ For each Event ID 4624 record, the test extracts the EventData fields and checks
 2. `TargetUserName = Administrator`
 
 ## Test Result
+
+**PASS**
+
+Observed result:
 
 ```text
 CTSHIELD-005 matched 3 Administrator network logon event(s).

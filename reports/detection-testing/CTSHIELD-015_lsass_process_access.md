@@ -2,18 +2,20 @@
 
 ## Detection
 
-- Rule: CTSHIELD-015
-- Title: Mimikatz Process Access to LSASS
-- Rule file: `detections/sigma/CTSHIELD-015_lsass_process_access.yml`
-- Status: Experimental
-- Severity: High
+- **Rule:** CTSHIELD-015
+- **Title:** Mimikatz Process Access to LSASS
+- **Rule file:** `detections/sigma/CTSHIELD-015_lsass_process_access.yml`
+- **ATT&CK Technique:** T1003.001 - LSASS Memory
+- **Tactic:** Credential Access
+- **Status:** Experimental
+- **Severity:** High
 
 ## Dataset
 
-- Dataset: EVTX-ATT&CK-SAMPLES
-- Source file: `Credential Access/sysmon_10_lsass_mimikatz_sekurlsa_logonpasswords.evtx`
-- Log channel: Microsoft-Windows-Sysmon/Operational
-- Detection event: Event ID 10
+- **Dataset:** EVTX-ATTACK-SAMPLES
+- **Source file:** `Credential Access/sysmon_10_lsass_mimikatz_sekurlsa_logonpasswords.evtx`
+- **Log channel:** Microsoft-Windows-Sysmon/Operational
+- **Detection event:** Event ID 10
 
 ## Detection Logic
 
@@ -52,38 +54,6 @@ Command:
 
 Result:
 
-`CTSHIELD-015 matched 1 Mimikatz-to-LSASS process access event(s).`
-
-`1 passed in 0.05s`
-
-## Sigma Validation
-
-The rule was validated using Sigma CLI.
-
-Result:
-
-`Found 0 errors, 0 condition errors and 0 issues.`
-
-## False Positive Considerations
-
-Potential benign causes include:
-
-- Authorized security testing with Mimikatz
-- Incident response or forensic analysis using Mimikatz
-- Security research environments
-
-Investigation should consider the source process, user context, command-line telemetry where available, process ancestry, host role, and surrounding authentication or credential-access activity.
-
-## ATT&CK Mapping
-
-- Technique: T1003
-- Technique name: OS Credential Dumping
-- Tactic: Credential Access
-
-## Test Conclusion
-
-CTSHIELD-015 successfully matched one Mimikatz-to-LSASS process access event in the selected public EVTX telemetry.
-
-The Sigma rule passed validation and the corresponding automated test passed against the actual dataset.
-
-The detection provides a focused signal for investigating potential credential-dumping activity involving Mimikatz and LSASS.
+```text
+CTSHIELD-015 matched 1 Mimikatz-to-LSASS process access event(s).
+1 passed in 0.05s

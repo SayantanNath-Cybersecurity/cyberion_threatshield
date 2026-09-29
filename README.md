@@ -1,62 +1,67 @@
 # Cyberion ThreatShield
 
-## Cyberion Defense Labs
-### Detection Engineering & Threat Hunting Engagement
+Detection Engineering & Threat Hunting
 
-**Project Code:** CDL-DET-V2  
-**Version:** 2.0  
-**Engagement Type:** Individual Detection Engineering Track  
-**Duration:** 4 Weeks
+## Overview
 
----
+Cyberion ThreatShield is an analytical cybersecurity project focused on detection engineering, threat hunting, MITRE ATT&CK mapping, incident investigation, and detection tuning.
 
-## 1. Project Overview
+The project uses public Windows security telemetry to develop and validate portable Sigma detections.
 
-Cyberion ThreatShield is a detection engineering and threat hunting engagement focused on analyzing publicly available security telemetry, engineering Sigma detection rules, mapping detections to MITRE ATT&CK, conducting structured threat hunts, and documenting confirmed security incidents.
+It is intentionally not a production application, SIEM, SOAR platform, backend service, or database.
 
-This project is an analytical and content-engineering engagement. It does not develop or deploy a custom security application.
+## Project Scope
 
----
+The project includes:
 
-## 2. Objectives
+- Sigma detection engineering
+- MITRE ATT&CK mapping
+- Detection testing against actual EVTX telemetry
+- Correlation detections
+- Threat hunting
+- Incident investigation
+- Incident response playbooks
+- IOC research
+- False-positive analysis
+- Detection tuning
+- Executive reporting
 
-The engagement aims to:
+## Dataset
 
-- Analyze real security log datasets.
-- Build and test a documented Sigma detection library.
-- Map detections to MITRE ATT&CK techniques.
-- Conduct structured threat hunts.
-- Investigate confirmed findings through incident case reports.
-- Develop practical incident response playbooks.
-- Research indicators of compromise.
-- Document false-positive considerations and detection tuning.
-- Produce reproducible, evidence-backed security documentation.
+Primary dataset:
 
----
+**EVTX-ATTACK-SAMPLES**
 
-## 3. Project Targets
+Source:
 
-| Deliverable | Target |
-|---|---:|
-| Sigma detection rules | 15+ |
-| ATT&CK techniques assessed | 20+ |
-| Threat hunts | 2+ |
-| Incident case reports | 2+ |
-| IR playbooks | 3+ |
-| Rules tested against actual telemetry | 100% |
-| Rules with documented FP considerations | 100% |
+`https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES`
 
----
+Dataset commit used for reproducibility:
 
-## 4. Repository Structure
+`4ceed2f4706daf601c212a8f91c113dd85349a2c`
+
+Raw EVTX files are excluded from the Git repository.
+
+## Detection Library
+
+The final detection library contains:
+
+**19 Sigma rules**
+
+Every final rule includes:
+
+- ATT&CK technique mapping
+- Detection logic
+- References
+- False-positive considerations
+- Severity
+- Test evidence
+
+## Validation
+
+Sigma validation:
 
 ```text
-data/              Security telemetry and dataset documentation
-detections/        Sigma detection rules and detection evidence
-hunts/             Structured threat hunting reports
-incidents/         Incident investigation case reports
-playbooks/         Incident response playbooks
-ioc-research/      IOC research and operationalization notes
-reports/           Executive and engagement reports
-docs/              Methodology, data dictionary and supporting documentation
-tests/             Detection testing and validation material
+0 errors
+0 condition errors
+0 issues

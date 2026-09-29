@@ -4,7 +4,8 @@
 
 - **Rule ID:** CTSHIELD-002
 - **Rule:** Kerberos Pre-Authentication Failure
-- **ATT&CK Technique:** Credential Access
+- **ATT&CK Technique:** T1110.001 - Password Guessing
+- **Tactic:** Credential Access
 - **Severity:** Medium
 - **Status:** Experimental
 
@@ -35,7 +36,7 @@ Each event was parsed from XML and evaluated against the detection selection rep
 
 Observed result:
 
-CTSHIELD-002 matched 2 Kerberos pre-authentication failure event(s).
+`CTSHIELD-002 matched 2 Kerberos pre-authentication failure event(s).`
 
 ## Observed Evidence
 
@@ -71,7 +72,7 @@ The selected sample contains two such failures with status `0x00000018`. The eve
 
 This provides useful evidence for investigating repeated authentication failures and possible credential-access activity.
 
-The detection does not independently establish password spraying or malicious intent. Additional correlation across authentication events, source addresses, target accounts, and time windows should be used when investigating that hypothesis.
+The atomic detection does not independently establish password spraying or malicious intent. Correlation across authentication events, source addresses, target accounts, and time windows provides stronger evidence for password-guessing or password-spraying hypotheses.
 
 ## False-Positive Considerations
 
@@ -81,6 +82,14 @@ Potential legitimate causes include:
 - Expired or invalid credentials
 - Misconfigured applications or services
 - Legitimate authentication failures
+
+## ATT&CK Mapping
+
+- **Technique:** T1110.001
+- **Technique Name:** Password Guessing
+- **Tactic:** Credential Access
+
+The rule provides an atomic authentication-failure signal. Multi-account correlation is handled separately by CTSHIELD-018.
 
 ## Reproduction
 

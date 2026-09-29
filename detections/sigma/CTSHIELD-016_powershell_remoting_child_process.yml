@@ -1,9 +1,13 @@
 title: PowerShell Remoting Child Process
 id: 3f8a6d21-7c45-4b90-ae13-5d2f9c714806
 status: experimental
-description: Detects Sysmon process creation events where a process is launched by the Windows PowerShell Remoting host process.
+description: Detects Sysmon process creation events where a process is launched by the Windows PowerShell Remoting host process, providing telemetry relevant to Windows Remote Management activity.
 references:
+  - https://attack.mitre.org/techniques/T1021/006/
   - https://learn.microsoft.com/windows/win32/winrm/portal
+tags:
+  - attack.lateral-movement
+  - attack.t1021.006
 logsource:
   product: windows
   category: process_creation

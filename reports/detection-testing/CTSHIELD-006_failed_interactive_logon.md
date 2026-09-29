@@ -1,19 +1,21 @@
-# CTSHIELD-006 Detection Test Report
+k# CTSHIELD-006 Detection Test Report
 
 ## Detection
 
-- Rule: CTSHIELD-006
-- Title: Failed Interactive Logon
-- Rule file: `detections/sigma/CTSHIELD-006_failed_interactive_logon.yml`
-- Status: Experimental
-- Severity: Low
+- **Rule:** CTSHIELD-006
+- **Title:** Failed Interactive Logon
+- **Rule file:** `detections/sigma/CTSHIELD-006_failed_interactive_logon.yml`
+- **ATT&CK Technique:** T1110.001 - Password Guessing
+- **Tactic:** Credential Access
+- **Status:** Experimental
+- **Severity:** Low
 
 ## Dataset
 
-- Dataset: EVTX-ATTACK-SAMPLES
-- Source file: `Credential Access/CA_4624_4625_LogonType2_LogonProc_chrome.evtx`
-- Log channel: Security
-- Event ID: 4625
+- **Dataset:** EVTX-ATT&CK-SAMPLES
+- **Source file:** `Credential Access/CA_4624_4625_LogonType2_LogonProc_chrome.evtx`
+- **Log channel:** Security
+- **Event ID:** 4625
 
 ## Detection Logic
 
@@ -44,7 +46,7 @@ The observed event demonstrates that the detection logic matches the expected fa
 
 ## Test Method
 
-The test was executed using the project detection test:
+The test was executed using:
 
 `tests/detections/test_ctshield_006.py`
 
@@ -54,30 +56,6 @@ Command:
 
 Result:
 
-`CTSHIELD-006 matched 1 failed interactive logon event(s).`
-
-`1 passed in 0.08s`
-
-## False Positive Considerations
-
-Potential benign causes include:
-
-- Users entering an incorrect password
-- Local applications attempting authentication with invalid credentials
-- User account configuration or credential synchronization problems
-
-The observed event alone does not establish malicious activity.
-
-## ATT&CK Mapping
-
-The Sigma rule currently uses the `attack.credential-access` tactic tag.
-
-An exact ATT&CK technique mapping has not been assigned to this rule based solely on the observed failed interactive logon event.
-
-## Test Conclusion
-
-CTSHIELD-006 successfully matched the expected Event ID 4625 interactive logon failure in the selected public telemetry.
-
-The detection is therefore validated against an actual dataset event.
-
-The result does not by itself establish an attack or malicious intent.
+```text
+CTSHIELD-006 matched 1 failed interactive logon event(s).
+1 passed in 0.08s
